@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<!-- put header here-->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Poker Bankroll Tracker</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="static/app/Images/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="static/app/css/styles.css" rel="stylesheet" />
+
+</head>
+
+<body class="d-flex flex-column h-100">
+    <main class="flex-shrink-0">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-5">
+                <a class="navbar-brand" href="home.html">Bankroll Strategist</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"><span
+                        class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <!-- About section explaining how variance calcs work -->
+                        <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
+                                <li><a class="dropdown-item" href="blog-home.html">Blog Home</a></li>
+                                <li><a class="dropdown-item" href="blog-post.html">Blog Post</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
+                                <li><a class="dropdown-item" href="variance.html">Variance Simulator</a></li>
+                                <!-- This needs to link to the Dash App -->
+                                <li><a class="dropdown-item" href="portfolio-item.html">Bank Roll Simulator</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+            <!-- Page Content-->
+            <section class="py-5">
+                <div class="container px-5 my-5">
+                    <div class="row gx-5 justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="text-center mb-5">
+                                <h1 class="fw-bolder">Poker Variance Simulator</h1>
+                                <p class="lead fw-normal text-muted mb-0">This simulator can be used to model the swings you can expect in your results in terms of big blinds. Input your winrate, standard deviation, and number of hands you wish to simulate. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row gx-5">
+                        <!-- <div class="col-12"><img class="img-fluid rounded-3 mb-5" src="https://dummyimage.com/1300x700/343a40/6c757d" alt="..." /></div> <!-- here we insert iframe for variance simulator -->
+                        <!--<div class="col-lg-6"><img class="img-fluid rounded-3 mb-5" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." /></div>
+                        <div class="col-lg-6"><img class="img-fluid rounded-3 mb-5" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." /></div> -->
+                        
+                    </div>
+
+                    <div>
+                    <H1>Poker Bankroll and Variance Simulator</H1>
+                    <p>Simulate how your poker results will vary, and how you should approach bankroll management</p>
+                    <div>
+                        <h2>Results in bb</h2>
+                        <span>
+                            <i>Enter your winrate (bb/100), standard deviation (STD (bb/100)), and number of hands
+                             to simulate. The first graph will display winnings/losses in big blinds</i>
+                        </span>
+                    </div>
+                    </div>
+                    
+                    <div>
+                    html.Span(children = [html.B('Win Rate (bb/100) ')]),
+                    <span>
+                        <form>
+                            <b>Win Rate (bb/100)</b>
+                            <input type="number" id="win-rate-input" value = 5>
+                            <b>STD (bb/100)</b>
+                            <input type="number" id="std-input" value=100>
+                            <b>No Hands to Simulate</b>
+                            <input type="number" id="hands-input" value=1000>
+                            <button id="bb-button"  type="button">Run Simulation!</button>
+                        </form>
+                    
+                    </span>
+                    </div>
+                    <div>
+                        <chart id="variance-chart"></chart>
+                        
+                        <div id="variance-Sim" style="max-width:700px; height:400px"></div>
+                    </div>
+                    <table>
+                        <tr>
+                            <td>Mean Winnings (bb)</td> <td id="bb-mean-win">100</td>
+                        </tr>
+                        <tr>
+                            <td>Expected Value (bb)</td> 
+                            <td id = "expected-val">100</td>
+                        </tr>
+                        <tr>
+                            <td>STD Winnings (bb)</td> 
+                            <td id="bb-std-win">100</td>
+                        </tr>
+                        <tr>
+                            <td>95% Confidence Interval (bb)</td> 
+                            <td id="bb-95ci">100</td>
+                        </tr>
+                        <tr>
+                            <td>70% Confidence Interval (bb)</td>
+                            <td id="bb-70ci">100</td>
+                        </tr>
+                        <tr>
+                            <td>Mean bb/100</td>
+                            <td id="mean-bb100">5</td>
+                        </tr>
+                        <tr>
+                            <td>STD bb/100</td>
+                            <td id="std-bb100">100</td>
+                        </tr>
+                        <tr>
+                            <td>95% Confidence Interval (bb/100)</td>
+                            <td id="95ci-bb100">5</td>
+                        </tr>
+                        <tr>
+                            <td>70% Confidence INterval (bb/100)</td>
+                            <td id="70ci-100">2.5</td>
+                        </tr>
+                    </table>
+                    <div class="row gx-5 justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="text-center mb-5">
+                                <p class="lead fw-normal text-muted">You can now use the confidence intervals to determine a confidence interval for your dollar winnings over a length of hands.</p>
+                                <a class="text-decoration-none" href="#!"> <!-- use this href to link to bankroll simulator -->
+                                    View project
+                                    <i class="bi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+<footer class="bg-dark py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+            <div class="col-auto">
+                <div class="small m-0 text-white">Copyright &copy; Your Website 2021</div>
+            </div>
+            <div class="col-auto">
+                <a class="link-light small" href="#!">Privacy</a>
+                <span class="text-white mx-1">&middot;</span>
+                <a class="link-light small" href="#!">Terms</a>
+                <span class="text-white mx-1">&middot;</span>
+                <a class="link-light small" href="#!">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="static/app/js/scripts.js"></script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="Variance.js"></script>
+</body>
+</html>
